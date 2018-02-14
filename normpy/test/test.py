@@ -51,16 +51,16 @@ def test_tc():
     exp_obj = experiment.Experiment(counts_fname, samples)
     # Normalization without explicit library sizes
     norm_counts_df = normalizers.norm_tc(exp_obj)
-    print "Pre-normalized counts: "
-    print exp_obj.counts_df.head()
-    print "Normalized counts: "
-    print norm_counts_df.head()
+    print("Pre-normalized counts: ")
+    print(exp_obj.counts_df.head())
+    print("Normalized counts: ")
+    print(norm_counts_df.head())
     # Normalization with library sizes
     exp_obj.lib_sizes = {"untreated1": 100,
                          "untreated2": 200}
     norm_counts_df = normalizers.norm_tc(exp_obj)
-    print "Normalized with library size: "
-    print norm_counts_df.head()
+    print("Normalized with library size: ")
+    print(norm_counts_df.head())
 
 
 def test_deseq():
@@ -74,12 +74,12 @@ def test_deseq():
     samples["Untreated 2"] = "untreated2"
     exp_obj = experiment.Experiment(counts_fname, samples)
     norm_counts_df = normalizers.norm_deseq(exp_obj)
-    print "\nDESeq Testing:"
-    print "--------------"
-    print "Pre-normalized counts: "
-    print exp_obj.counts_df.head()
-    print "Normalized counts: "
-    print norm_counts_df.head()
+    print("\nDESeq Testing:")
+    print("--------------")
+    print("Pre-normalized counts: ")
+    print(exp_obj.counts_df.head())
+    print("Normalized counts: ")
+    print(norm_counts_df.head())
 
 
 def test_lowess():
@@ -94,12 +94,12 @@ def test_lowess():
     exp_obj = experiment.Experiment(counts_fname, samples)
     pairs = [["untreated1", "untreated2"]]
     norm_df, unnorm_df = normalizers.norm_ma_lowess(exp_obj, pairs)
-    print "\nLowess Testing:"
-    print "--------------"
-    print "Pre-normalized values: "
-    print unnorm_df.head()
-    print "Normalized counts: "
-    print norm_df.head()
+    print("\nLowess Testing:")
+    print("--------------")
+    print("Pre-normalized values: ")
+    print(unnorm_df.head())
+    print("Normalized counts: ")
+    print(norm_df.head())
     # Compare LOWESS normalized to total counts
     pair = ["untreated1", "untreated2"]
     plot_utils.plot_fcs(norm_df, unnorm_df, pair, "lowess_test")
@@ -117,12 +117,12 @@ def R_test_lowess():
     exp_obj = experiment.Experiment(counts_fname, samples)
     pairs = [["untreated1", "untreated2"]]
     norm_df, unnorm_df = normalizers.R_norm_ma_lowess(exp_obj, pairs)
-    print "\nLowess Testing:"
-    print "--------------"
-    print "Pre-normalized values: "
-    print unnorm_df.head()
-    print "Normalized counts: "
-    print norm_df.head()
+    print("\nLowess Testing:")
+    print("--------------")
+    print("Pre-normalized values: ")
+    print(unnorm_df.head())
+    print("Normalized counts: ")
+    print(norm_df.head())
     # Compare LOWESS normalized to total counts
     pair = ["untreated1", "untreated2"]
     plot_utils.plot_fcs(norm_df, unnorm_df, pair, "R_lowess_test")
@@ -139,12 +139,12 @@ def test_tmm():
     samples["Untreated 2"] = "untreated2"
     exp_obj = experiment.Experiment(counts_fname, samples)
     norm_counts_df = normalizers.norm_tmm(exp_obj)
-    print "\nTMM Testing:"
-    print "--------------"
-    print "Pre-normalized counts: "
-    print exp_obj.counts_df.head()
-    print "Normalized counts: "
-    print norm_counts_df.head()
+    print("\nTMM Testing:")
+    print("--------------")
+    print("Pre-normalized counts: ")
+    print(exp_obj.counts_df.head())
+    print("Normalized counts: ")
+    print(norm_counts_df.head())
 
 
 def test_quantile():
@@ -158,12 +158,12 @@ def test_quantile():
     samples["Untreated 2"] = "untreated2"
     exp_obj = experiment.Experiment(counts_fname, samples)
     norm_counts_df = normalizers.norm_q(exp_obj)
-    print "\nQuantile Testing:"
-    print "--------------"
-    print "Pre-normalized counts: "
-    print exp_obj.counts_df.head()
-    print "Normalized counts: "
-    print norm_counts_df.head()
+    print("\nQuantile Testing:")
+    print("--------------")
+    print("Pre-normalized counts: ")
+    print(exp_obj.counts_df.head())
+    print("Normalized counts: ")
+    print(norm_counts_df.head())
 
 
 def test_quantile_vs_tmm():
@@ -179,13 +179,13 @@ def test_quantile_vs_tmm():
     exp_obj = experiment.Experiment(counts_fname, samples)
     quantile_counts_df = normalizers.norm_q(exp_obj)
     tmm_counts_df = normalizers.norm_tmm(exp_obj)
-    print "\nQuantile versus TMM Testing:"
-    print "--------------"
-    print "Normalized quantile counts: "
-    print quantile_counts_df.head()
-    print "Normalized TMM counts: "
-    print tmm_counts_df.head()
-    print "Correlating the genes."
+    print("\nQuantile versus TMM Testing:")
+    print("--------------")
+    print("Normalized quantile counts: ")
+    print(quantile_counts_df.head())
+    print("Normalized TMM counts: ")
+    print(tmm_counts_df.head())
+    print("Correlating the genes.")
     # Merge the dataframes together, indexing by gene
     combined_df = pandas.merge(quantile_counts_df, tmm_counts_df,
                                left_index=True,
@@ -195,10 +195,10 @@ def test_quantile_vs_tmm():
     # Get log of counts: get rid of infinite values
     log_counts_df = combined_df.apply(np.log2).replace([-np.inf, np.inf],
                                                        np.nan)
-    print "Combined dataframe: "
-    print combined_df.head()
-    print "Combined log dataframe: "
-    print log_counts_df.head()
+    print("Combined dataframe: ")
+    print(combined_df.head())
+    print("Combined log dataframe: ")
+    print(log_counts_df.head())
     # Plot correlation
     from pandas.tools.plotting import scatter_matrix
     scatter_matrix(log_counts_df, alpha=0.2, figsize=(8, 7))

@@ -23,7 +23,7 @@ try:
     from rpy2.robjects import r, Formula
     py2ri_orig = rpy2.robjects.conversion.py2ri
 except:
-    raise Exception, "Cannot import rpy2."
+    raise Exception("Cannot import rpy2.")
 
 
 class EdgeR:
@@ -54,11 +54,11 @@ class EdgeR:
         r_dge = r.calcNormFactors(r_dge,
                                   refColumn=ref_col,
                                   method=method)
-        print r_dge[0:10]
+        print(r_dge[0:10])
         # Get counts per million
         r_cpm_result = r.cpm(r_dge)
-        print "Counts per million: "
-        print r_cpm_result[0:10]
+        print("Counts per million: ")
+        print(r_cpm_result[0:10])
         return r_dge, r_cpm_result
         
 
@@ -75,7 +75,7 @@ def conversion_pydataframe(obj):
     """
     if isinstance(obj, pandas.core.frame.DataFrame):
         od = OrderedDict()
-        for name, values in obj.iteritems():
+        for name, values in obj.items():
             if values.dtype.kind == 'O':
                 od[name] = rpy2.robjects.vectors.StrVector(values)
             else:

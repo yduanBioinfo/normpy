@@ -12,7 +12,7 @@ def pathify(filename):
 
 def make_dir(dirpath):
     if os.path.isfile(dirpath):
-        print "Error: %s is a file!" %(dirpath)
+        print("Error: %s is a file!" %(dirpath))
         sys.exit(1)
     # Try to make the directory
     try:
@@ -29,10 +29,10 @@ def load_testdata(test_name):
             os.path.join(os.path.abspath(os.path.join(__file__, "..")),
                          testdir, "pasilla_gene_counts.tsv")
         if not os.path.isfile(pasilla_fname):
-            raise Exception, "Cannot find pasilla file %s" %(pasilla_fname)
+            raise Exception("Cannot find pasilla file %s" %(pasilla_fname))
         return pasilla_fname
     else:
-        raise Exception, "Unknown test name %s" %(test_name)
+        raise Exception("Unknown test name %s" %(test_name))
 
 
 def get_plots_dir():
@@ -46,8 +46,8 @@ def where_na_like(l):
     """
     Return indices where array is NA-like
     """
-    bool_index = np.array(map(lambda x: np.isinf(x) or \
-                              pandas.isnull(x), l))
+    bool_index = np.array([np.isinf(x) or \
+                              pandas.isnull(x) for x in l])
     return np.where(bool_index)[0]
 
 
@@ -93,14 +93,14 @@ def select_df_rows(df, cond,
         # apply to N many columns
         result_ind = cond_result.sum(axis=1) >= how
     else:
-        raise Exception, "Do not know %s" %(how)
+        raise Exception("Do not know %s" %(how))
     result = df[result_ind]
     return result, result_ind
 
 
 def make_dir(dirpath):
     if os.path.isfile(dirpath):
-        print "Error: %s is a file!" %(dirpath)
+        print("Error: %s is a file!" %(dirpath))
         sys.exit(1)
     # Try to make the directory
     try:

@@ -28,10 +28,10 @@ def plot_fcs(normed_df, unnormed_df, pair, basename):
     """
     if (pair[0] not in normed_df.columns) or \
        (pair[1] not in normed_df.columns):
-        raise Exception, "One of the pairs is not in normed df."
+        raise Exception("One of the pairs is not in normed df.")
     if (pair[0] not in unnormed_df.columns) or \
        (pair[1] not in unnormed_df.columns):
-        raise Exception, "One of the pairs is not in unnormed.df"
+        raise Exception("One of the pairs is not in unnormed.df")
     normed_fc = \
         np.log2(normed_df[pair[0]]) - np.log2(normed_df[pair[1]])
     unnormed_fc = \

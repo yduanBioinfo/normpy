@@ -18,7 +18,7 @@ try:
     # Import lowess function from statsmodels -- alternative to R
     from statsmodels.nonparametric.smoothers_lowess import lowess
 except:
-    raise Exception, "statsmodels not available?"
+    raise Exception("statsmodels not available?")
 
 try:
     import rpy2
@@ -31,7 +31,7 @@ try:
     from rpy2.robjects import r, Formula
     py2ri_orig = rpy2.robjects.conversion.py2ri
 except:
-    raise Exception, "Cannot import rpy2."
+    raise Exception("Cannot import rpy2.")
 
 
 
@@ -61,7 +61,7 @@ def norm_tc(exp_obj):
     for sample_col in norm_counts_df.columns:
         norm_denom = float(total_counts[sample_col])
         if norm_denom == 0:
-            raise Exception, "Sample %s is an empty library!" %(sample_col)
+            raise Exception("Sample %s is an empty library!" %(sample_col))
         norm_counts_df[sample_col] = norm_counts_df[sample_col] / norm_denom
     return norm_counts_df
 
@@ -101,9 +101,9 @@ def R_norm_ma_lowess(exp_obj, pairs,
         df = norm_tc(exp_obj)
         df = utils.drop_null_rows(df, columns=utils.flatten(pairs))
     else:
-        raise Exception, "Unknown value method %s" %(value_method)
+        raise Exception("Unknown value method %s" %(value_method))
     num_pairs = len(pairs)
-    print "LOWESS MA normalizing %d pairs" %(num_pairs)
+    print("LOWESS MA normalizing %d pairs" %(num_pairs))
     norm_df = df.copy()
     norm_df = utils.drop_null_rows(norm_df, columns=utils.flatten(pairs))
     for pair in pairs:
@@ -197,9 +197,9 @@ def norm_ma_lowess(exp_obj, pairs,
         df = norm_tc(exp_obj)
         df = utils.drop_null_rows(df, columns=utils.flatten(pairs))
     else:
-        raise Exception, "Unknown value method %s" %(value_method)
+        raise Exception("Unknown value method %s" %(value_method))
     num_pairs = len(pairs)
-    print "LOWESS MA normalizing %d pairs" %(num_pairs)
+    print("LOWESS MA normalizing %d pairs" %(num_pairs))
     norm_df = df.copy()
     norm_df = utils.drop_null_rows(norm_df, columns=utils.flatten(pairs))
     for pair in pairs:

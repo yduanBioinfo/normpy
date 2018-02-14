@@ -23,7 +23,7 @@ try:
     from rpy2.robjects import r, Formula
     py2ri_orig = rpy2.robjects.conversion.py2ri
 except:
-    raise Exception, "Cannot import rpy2."
+    raise Exception("Cannot import rpy2.")
 
 
 class Experiment:
@@ -76,7 +76,7 @@ class Experiment:
         """
         if type(self.counts) == str:
             if not os.path.isfile(self.counts):
-                raise Exception, "Cannot find counts file %s" %(self.counts)
+                raise Exception("Cannot find counts file %s" %(self.counts))
             counts_fname = self.counts
             self.counts_df = pandas.read_table(counts_fname, sep=sep)
         else:
@@ -89,7 +89,7 @@ class Experiment:
             self.counts_df = self.counts_df.set_index(self.gene_id_col)
         # Select only the columns relevant to the samples, plus
         # the gene id column
-        relevant_cols = self.extra_cols + self.samples.values()
+        relevant_cols = self.extra_cols + list(self.samples.values())
         self.counts_df = self.counts_df[relevant_cols]
 
 
