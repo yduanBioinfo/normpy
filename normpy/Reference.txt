@@ -1,0 +1,3 @@
+Mark D Robinson and Alicia Oshlack (2010). A scaling normalization method for differential expression analysis of RNA-seq data. _Genome Biology_ 11, R25. (tmm)
+
+Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a Bioconductor package for differential expression analysis of digital gene expression data. Bioinformatics 26, 139-140. (edgeR)
