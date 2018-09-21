@@ -2,6 +2,7 @@
 ## Unit tests
 ##
 import os
+import sys
 
 import pandas
 
@@ -36,7 +37,7 @@ def test_edgeR():
     exp_obj = experiment.Experiment(counts_fname, samples)
     edgeR_obj = edgeR_utils.EdgeR(exp_obj)
     edgeR_obj.norm_expr_vals(ref_col="untreated1")
-
+    sys.write("Test edgeR done!\n")
 
 def test_tc():
     """
@@ -61,6 +62,7 @@ def test_tc():
     norm_counts_df = normalizers.norm_tc(exp_obj)
     print("Normalized with library size: ")
     print(norm_counts_df.head())
+    sys.write("Test tc done!\n")
 
 
 def test_deseq():
@@ -80,6 +82,7 @@ def test_deseq():
     print(exp_obj.counts_df.head())
     print("Normalized counts: ")
     print(norm_counts_df.head())
+    sys.write("Test deseq done!\n")
 
 
 def test_lowess():
@@ -103,6 +106,7 @@ def test_lowess():
     # Compare LOWESS normalized to total counts
     pair = ["untreated1", "untreated2"]
     plot_utils.plot_fcs(norm_df, unnorm_df, pair, "lowess_test")
+    sys.write("Test lowess done!\n")
 
 
 def R_test_lowess():
@@ -126,6 +130,7 @@ def R_test_lowess():
     # Compare LOWESS normalized to total counts
     pair = ["untreated1", "untreated2"]
     plot_utils.plot_fcs(norm_df, unnorm_df, pair, "R_lowess_test")
+    sys.write("Test R lowess done!\n")
 
 
 def test_tmm():
@@ -145,6 +150,7 @@ def test_tmm():
     print(exp_obj.counts_df.head())
     print("Normalized counts: ")
     print(norm_counts_df.head())
+    sys.write("Test tmm done!\n")
 
 
 def test_quantile():
@@ -164,6 +170,7 @@ def test_quantile():
     print(exp_obj.counts_df.head())
     print("Normalized counts: ")
     print(norm_counts_df.head())
+    sys.write("Test quantile done!\n")
 
 
 def test_quantile_vs_tmm():
@@ -203,6 +210,7 @@ def test_quantile_vs_tmm():
     from pandas.tools.plotting import scatter_matrix
     scatter_matrix(log_counts_df, alpha=0.2, figsize=(8, 7))
     plot_utils.save_fig("quantile_vs_tmm_corr", ext="png")
+    sys.write("Test quantile vs tmm done!\n")
 
     
 def main():
