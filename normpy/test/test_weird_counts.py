@@ -26,19 +26,19 @@ def test_weird_counts():
     tmm_norm = normalizers.norm_tmm(exp_obj)
     # Compare results for one gene
     g = "ENSMUSG00000020140"
-    print "DESeq results for %s" %(g)
-    print deseq_norm.ix[g]
-    print "=" * 10
-    print "TMM resutls for %s" %(g)
-    print tmm_norm.ix[g]
+    print("DESeq results for %s" %(g))
+    print(deseq_norm.ix[g])
+    print("=" * 10)
+    print("TMM resutls for %s" %(g))
+    print(tmm_norm.ix[g])
     # fold difference in counts for sample C
-    print "Fold difference in sample C (TMM / DESeq): %.4f" \
-          %(tmm_norm.ix[g]["counts_C"] / deseq_norm.ix[g]["counts_C"])
+    print("Fold difference in sample C (TMM / DESeq): %.4f" \
+          %(tmm_norm.ix[g]["counts_C"] / deseq_norm.ix[g]["counts_C"]))
     # fold relative difference in counts, comparing A to C
     tmm_A_vs_C = tmm_norm.ix[g]["counts_A"] / tmm_norm.ix[g]["counts_C"]
     deseq_A_vs_C = deseq_norm.ix[g]["counts_A"] / deseq_norm.ix[g]["counts_C"]
-    print "TMM fold change A vs. C: %.2f" %(tmm_A_vs_C)
-    print "DESeq fold change A vs. C: %.2f" %(deseq_A_vs_C)
+    print("TMM fold change A vs. C: %.2f" %(tmm_A_vs_C))
+    print("DESeq fold change A vs. C: %.2f" %(deseq_A_vs_C))
     
 
 def main():
