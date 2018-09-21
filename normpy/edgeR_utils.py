@@ -14,7 +14,8 @@ import normpy.utils as utils
 
 try:
     import rpy2
-    from rpy2.robjects import r
+    from rpy2.robjects import r, pandas2ri
+    pandas2ri.activate()
     import rpy2.robjects as robj
     import rpy2.robjects.numpy2ri
     from rpy2.robjects.packages import importr
@@ -75,7 +76,7 @@ def conversion_pydataframe(obj):
     """
     if isinstance(obj, pandas.core.frame.DataFrame):
         od = OrderedDict()
-        for name, values in obj.items():
+        for name, values in obj.iteritems():
             if values.dtype.kind == 'O':
                 od[name] = rpy2.robjects.vectors.StrVector(values)
             else:
